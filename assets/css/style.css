@@ -37,16 +37,12 @@ section {
 }
 
 .results-panel {
-    /* background-color: teal; */
-    text-align: center;
     width: 70%;
     padding-bottom: 10px;
 }
 
 .current-conditions-panel {
     outline: 1px solid black;
-}
-
-#city-name {
-    
+    padding-left: 10px;
+    padding-bottom: 1px;
 }

@@ -8,17 +8,19 @@ function lookUpCity() {
     fetch(apiURL).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                console.log(data);
-
-
-                var displayCity = cityName + " (" + currentDate + ")";
-                $("#city-name")[0].textContent = displayCity;
+                $("#city-name")[0].textContent = cityName + " (" + currentDate + ")";
 
                 var latitude = data.coord.lat;
                 var longitude = data.coord.lon;
+                apiURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=hourly&units=imperial&appid=71311474f5b26fb7bbfa0bc1985b90cd";
 
-                console.log(latitude);
-                getWeather(data);
+                fetch(apiURL).then(function (newResponse) {
+                    if (newResponse.ok) {
+                        newResponse.json().then(function (newData) {
+                            getWeather(newData);
+                        })
+                    }
+                })
             })
         } else {
             alert("Cannot find city!");
@@ -27,10 +29,11 @@ function lookUpCity() {
 }
 
 function getWeather(data) {
-    // $("#temperature")[0].textContent = data.main.temp;
-    // $("#humidity")[0].textContent = data.main.humidity;
-    // $("#wind-speed")[0].textContent = data.wind.speed;
-    // $("#uv-index")[0].textContent = data.main.temp;
+    console.log(data);
+    $("#temperature")[0].textContent = "Temperature: " + data.current.temp + " \u2109";
+    $("#humidity")[0].textContent = "Humidity: " + data.current.humidity + "% ";
+    $("#wind-speed")[0].textContent = "Wind Speed: " + data.current.wind_speed + " MPH";
+    $("#uv-index")[0].textContent = "UV Index: " + data.current.uvi;
 }
 
 $("#search-button").on("click", function (e) {
