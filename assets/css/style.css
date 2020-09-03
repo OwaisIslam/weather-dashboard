@@ -7,7 +7,7 @@ main {
 }
 
 section {
-    margin-top: -0.6%;
+    margin-top: -8px;
 }
 
 .header,
@@ -23,8 +23,8 @@ section {
     padding-bottom: 10px;
 }
 
-.search-button {
-    margin-left: -2.7%;
+.search-button-panel {
+    margin-left: -52px;
 }
 
 .city-list-box {
@@ -45,4 +45,8 @@ section {
 
 .current-conditions-panel {
     outline: 1px solid black;
+}
+
+#city-name {
+    
 }
