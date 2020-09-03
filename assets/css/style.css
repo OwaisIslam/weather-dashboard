@@ -1,0 +1,41 @@
+body {
+    margin: 5px;
+    padding: 0;
+}
+
+main {
+    display: flex;
+}
+
+section {
+    margin-top: -0.6%;
+}
+
+.header,
+.row {
+    display: flex;
+    justify-content: center;
+}
+
+.search-panel,
+.results-panel {
+    text-align: center;
+}
+
+.search-panel {
+    background-color: tomato;
+    width: 30%;
+}
+
+.results-panel {
+    background-color: teal;
+    width: 70%;
+}
+
+.city-list-box {
+    background-color: violet;
+}
+
+.city-list {
+    list-style-type: none;
+}
