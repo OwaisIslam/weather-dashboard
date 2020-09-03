@@ -1,6 +1,5 @@
 body {
     margin: 5px;
-    padding: 0;
 }
 
 main {
@@ -17,25 +16,33 @@ section {
     justify-content: center;
 }
 
-.search-panel,
-.results-panel {
-    text-align: center;
-}
-
 .search-panel {
-    background-color: tomato;
+    /* background-color: tomato; */
     width: 30%;
+    margin-left: 5px;
+    padding-bottom: 10px;
 }
 
-.results-panel {
-    background-color: teal;
-    width: 70%;
+.search-button {
+    margin-left: -2.7%;
 }
 
 .city-list-box {
     background-color: violet;
+    margin-top: 5px;
 }
 
 .city-list {
     list-style-type: none;
+}
+
+.results-panel {
+    /* background-color: teal; */
+    text-align: center;
+    width: 70%;
+    padding-bottom: 10px;
+}
+
+.current-conditions-panel {
+    outline: 1px solid black;
 }
