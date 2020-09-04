@@ -1,4 +1,6 @@
-function lookUpCity() {
+localStorage.clear();
+
+function findCity() {
     // This capitalizes the city name.
     var cityName = ($("#cityName")[0].value.trim().toLowerCase().charAt(0).toUpperCase()) + ($("#cityName")[0].value.trim().toLowerCase().slice(1));
 
@@ -16,9 +18,14 @@ function lookUpCity() {
 
                 $("#city-list").append('<button type="button" class="list-group-item list-group-item-action city-name">' + cityName);
 
-                const latitude = data.coord.lat;
-                const longitude = data.coord.lon;
-                apiURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=minutely,hourly&units=imperial&appid=71311474f5b26fb7bbfa0bc1985b90cd";
+                const lat = data.coord.lat;
+                const lon = data.coord.lon;
+
+                var latLonPair = lat.toString() + " " + lon.toString();
+
+                localStorage.setItem(cityName, latLonPair);
+
+                apiURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly&units=imperial&appid=71311474f5b26fb7bbfa0bc1985b90cd";
 
                 fetch(apiURL).then(function (newResponse) {
                     if (newResponse.ok) {
@@ -34,9 +41,19 @@ function lookUpCity() {
     })
 }
 
-function getCurrentWeather(data) {
-    console.log(data);
+function getListCity(coordinates) {
+    apiURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + coordinates[0] + "&lon=" + coordinates[1] + "&exclude=minutely,hourly&units=imperial&appid=71311474f5b26fb7bbfa0bc1985b90cd";
 
+    fetch(apiURL).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (data) {
+                getCurrentWeather(data);
+            })
+        }
+    })
+}
+
+function getCurrentWeather(data) {
     $(".results-panel").addClass("show-element");
 
     $("#currentIcon")[0].src = "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + "@2x.png";
@@ -45,21 +62,18 @@ function getCurrentWeather(data) {
     $("#wind-speed")[0].textContent = "Wind Speed: " + data.current.wind_speed.toFixed(1) + " MPH";
     $("#uv-index")[0].textContent = "  " + data.current.uvi;
 
-    checkUVIndex(data.current.uvi);
-    getFutureWeather(data);
-}
-
-function checkUVIndex(uvIndex) {
-    if (uvIndex < 3) {
-        $("#uv-index").removeClass("moderate, severe");
+    if (data.current.uvi < 3) {
+        $("#uv-index").removeClass("moderate severe");
         $("#uv-index").addClass("favorable");
-    } else if (uvIndex < 6) {
-        $("#uv-index").removeClass("favorable, severe");
+    } else if (data.current.uvi < 6) {
+        $("#uv-index").removeClass("favorable severe");
         $("#uv-index").addClass("moderate");
     } else {
-        $("#uv-index").removeClass("favorable, moderate");
+        $("#uv-index").removeClass("favorable moderate");
         $("#uv-index").addClass("severe");
     }
+
+    getFutureWeather(data);
 }
 
 function getFutureWeather(data) {
@@ -91,11 +105,18 @@ function convertUnixTime(data, index) {
 $("#search-button").on("click", function (e) {
     e.preventDefault();
 
-    lookUpCity();
+    findCity();
 
     $("form")[0].reset();
 })
 
 $(".city-list-box").on("click", ".city-name", function () {
-    console.log($(this)[0].textContent);
+
+    var coordinates = (localStorage.getItem($(this)[0].textContent)).split(" ");
+    coordinates[0] = parseFloat(coordinates[0]);
+    coordinates[1] = parseFloat(coordinates[1]);
+
+    $("#city-name")[0].textContent = $(this)[0].textContent;
+
+    getListCity(coordinates);
 })
