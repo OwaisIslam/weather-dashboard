@@ -37,6 +37,7 @@ function getCurrentWeather(data) {
 
     $(".results-panel").addClass("show-element");
 
+    $("#currentIcon")[0].src = "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + "@2x.png";
     $("#temperature")[0].textContent = "Temperature: " + data.current.temp.toFixed(1) + " \u2109";
     $("#humidity")[0].textContent = "Humidity: " + data.current.humidity + "% ";
     $("#wind-speed")[0].textContent = "Wind Speed: " + data.current.wind_speed.toFixed(1) + " MPH";
@@ -47,7 +48,6 @@ function getCurrentWeather(data) {
 }
 
 function getFutureWeather(data) {
-    var futureWeatherList = [];
     for (var i = 0; i < 5; i++) {
         var futureWeather = {
             date: convertUnixTime(data, i),
@@ -55,7 +55,6 @@ function getFutureWeather(data) {
             temp: data.daily[i + 1].temp.day.toFixed(1),
             humidity: data.daily[i + 1].humidity
         }
-        futureWeatherList.push(futureWeather);
 
         var currentSelector = "#day-" + i;
         $(currentSelector)[0].textContent = futureWeather.date;
@@ -66,8 +65,6 @@ function getFutureWeather(data) {
         currentSelector = "#hum-" + i;
         $(currentSelector)[0].textContent = "Humidity: " + futureWeather.humidity + "%";
     }
-
-    console.log(futureWeatherList);
 }
 
 function convertUnixTime(data, index) {

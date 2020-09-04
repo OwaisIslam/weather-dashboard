@@ -7,11 +7,10 @@ main {
 }
 
 section {
-    margin-top: -8px;
+    margin-top: 10px;
 }
 
-.header,
-.row {
+.header {
     display: flex;
     justify-content: center;
 }
@@ -45,6 +44,19 @@ section {
     outline: 1px solid black;
     padding-left: 10px;
     padding-bottom: 1px;
+}
+
+.name-block {
+    display: flex;
+    align-items: center;
+}
+
+.forecast-panel {
+    padding-top: 10px;
+}
+
+.container {
+    display: inline;
 }
 
 .show-element {
