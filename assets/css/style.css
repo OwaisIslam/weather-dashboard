@@ -26,12 +26,11 @@ section {
 }
 
 .city-list-box {
-    background-color: violet;
     margin-top: 5px;
 }
 
-.city-list {
-    list-style-type: none;
+.city-name {
+    width: 66%;
 }
 
 .results-panel {
@@ -64,6 +63,24 @@ section {
 .container {
     display: inline;
 }
+
+.card-header,
+.card-body {
+    text-align: center;
+}
+
+.card-header {
+    background-color: blue;
+    color: white;
+}
+
+.card-body {
+    background-color: lightblue;
+}
+
+
+
+/* Classes Added to Elements */
 
 .show-element {
     visibility: visible;

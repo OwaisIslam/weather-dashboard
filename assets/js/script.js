@@ -14,6 +14,8 @@ function lookUpCity() {
 
                 $("#city-name")[0].textContent = cityName + " (" + currentDate + ")";
 
+                $("#city-list").append('<button type="button" class="list-group-item list-group-item-action city-name">' + cityName);
+
                 const latitude = data.coord.lat;
                 const longitude = data.coord.lon;
                 apiURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=minutely,hourly&units=imperial&appid=71311474f5b26fb7bbfa0bc1985b90cd";
@@ -41,7 +43,6 @@ function getCurrentWeather(data) {
     $("#temperature")[0].textContent = "Temperature: " + data.current.temp.toFixed(1) + " \u2109";
     $("#humidity")[0].textContent = "Humidity: " + data.current.humidity + "% ";
     $("#wind-speed")[0].textContent = "Wind Speed: " + data.current.wind_speed.toFixed(1) + " MPH";
-    // $("#uv-index")[0].textContent = "UV Index: " + data.current.uvi;
     $("#uv-index")[0].textContent = "  " + data.current.uvi;
 
     checkUVIndex(data.current.uvi);
@@ -49,8 +50,6 @@ function getCurrentWeather(data) {
 }
 
 function checkUVIndex(uvIndex) {
-    console.log(uvIndex);
-
     if (uvIndex < 3) {
         $("#uv-index").removeClass("moderate, severe");
         $("#uv-index").addClass("favorable");
@@ -93,4 +92,10 @@ $("#search-button").on("click", function (e) {
     e.preventDefault();
 
     lookUpCity();
+
+    $("form")[0].reset();
+})
+
+$(".city-list-box").on("click", ".city-name", function () {
+    console.log($(this)[0].textContent);
 })
