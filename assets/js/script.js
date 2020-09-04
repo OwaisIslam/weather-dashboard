@@ -1,10 +1,7 @@
 localStorage.clear();
 
 function findCity() {
-    // This capitalizes the city name.
-    var cityName = ($("#cityName")[0].value.trim().toLowerCase().charAt(0).toUpperCase()) + ($("#cityName")[0].value.trim().toLowerCase().slice(1));
-
-    // ^^ fix capitalization with two or three word cities
+    var cityName = titleCase($("#cityName")[0].value.trim());
 
     const currentDate = moment().format('M/D/YYYY');
 
@@ -16,7 +13,7 @@ function findCity() {
 
                 $("#city-name")[0].textContent = cityName + " (" + currentDate + ")";
 
-                $("#city-list").append('<button type="button" class="list-group-item list-group-item-action city-name">' + cityName);
+                $("#city-list").append('<button type="button" class="list-group-item list-group-item-light list-group-item-action city-name">' + cityName);
 
                 const lat = data.coord.lat;
                 const lon = data.coord.lon;
@@ -54,7 +51,7 @@ function getListCity(coordinates) {
 }
 
 function getCurrentWeather(data) {
-    $(".results-panel").addClass("show-element");
+    $(".results-panel").addClass("visible");
 
     $("#currentIcon")[0].src = "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + "@2x.png";
     $("#temperature")[0].textContent = "Temperature: " + data.current.temp.toFixed(1) + " \u2109";
@@ -94,6 +91,16 @@ function getFutureWeather(data) {
         currentSelector = "#hum-" + i;
         $(currentSelector)[0].textContent = "Humidity: " + futureWeather.humidity + "%";
     }
+}
+
+function titleCase(city) {
+    var updatedCity = city.toLowerCase().split(" ");
+    var returnedCity = "";
+    for (var i = 0; i < updatedCity.length; i++) {
+        updatedCity[i] = updatedCity[i][0].toUpperCase() + updatedCity[i].slice(1);
+        returnedCity += " " + updatedCity[i];
+    }
+    return returnedCity;
 }
 
 function convertUnixTime(data, index) {
