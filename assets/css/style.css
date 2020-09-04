@@ -17,7 +17,7 @@ section {
 
 .search-panel {
     width: 30%;
-    margin-left: 5px;
+    margin-left: 10px;
     padding-bottom: 10px;
 }
 
@@ -46,9 +46,15 @@ section {
     padding-bottom: 1px;
 }
 
-.name-block {
+.name-block,
+.uv-index-block {
     display: flex;
     align-items: center;
+}
+
+#uv-index {
+    margin-left: 5px;
+    padding: 5px 10px;
 }
 
 .forecast-panel {
@@ -61,4 +67,19 @@ section {
 
 .show-element {
     visibility: visible;
+}
+
+.favorable {
+    background-color: green;
+    color: white;
+}
+
+.moderate {
+    background-color: yellow;
+    color: black;
+}
+
+.severe {
+    background-color: red;
+    color: white;
 }

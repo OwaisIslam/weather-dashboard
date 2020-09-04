@@ -41,10 +41,26 @@ function getCurrentWeather(data) {
     $("#temperature")[0].textContent = "Temperature: " + data.current.temp.toFixed(1) + " \u2109";
     $("#humidity")[0].textContent = "Humidity: " + data.current.humidity + "% ";
     $("#wind-speed")[0].textContent = "Wind Speed: " + data.current.wind_speed.toFixed(1) + " MPH";
-    $("#uv-index")[0].textContent = "UV Index: " + data.current.uvi;
+    // $("#uv-index")[0].textContent = "UV Index: " + data.current.uvi;
+    $("#uv-index")[0].textContent = "  " + data.current.uvi;
 
+    checkUVIndex(data.current.uvi);
     getFutureWeather(data);
-    // convertUnixTime(data);
+}
+
+function checkUVIndex(uvIndex) {
+    console.log(uvIndex);
+
+    if (uvIndex < 3) {
+        $("#uv-index").removeClass("moderate, severe");
+        $("#uv-index").addClass("favorable");
+    } else if (uvIndex < 6) {
+        $("#uv-index").removeClass("favorable, severe");
+        $("#uv-index").addClass("moderate");
+    } else {
+        $("#uv-index").removeClass("favorable, moderate");
+        $("#uv-index").addClass("severe");
+    }
 }
 
 function getFutureWeather(data) {
