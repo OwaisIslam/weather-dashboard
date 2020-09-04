@@ -17,7 +17,7 @@ section {
 
 .search-panel {
     width: 25%;
-    margin: 0 20px 0 10px;
+    margin: 10px 20px 0 10px;
     padding: 10px 0 10px 10px;
     background-color: #DCDCDC;
 }
@@ -38,12 +38,14 @@ section {
     width: 75%;
     padding-bottom: 10px;
     visibility: hidden;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .current-conditions-panel {
-    outline: 1px solid black;
+    border: 1px solid #C0C0C0;
+    border-right: none;
     padding-left: 10px;
-    padding-bottom: 1px;
+    padding-bottom: 30px;
 }
 
 .name-block,
@@ -96,4 +98,30 @@ section {
 .severe {
     background-color: red;
     color: white;
+}
+
+
+/* Viewports Styling*/
+
+@media screen and (max-width: 575px) {
+    .search-panel {
+        width: 40%;
+    }
+
+    .search-button-panel {
+        margin-left: 0px;
+    }
+
+    .search-panel h3 {
+        font-size: 15px;
+    }
+
+    .form-row {
+        display: block;
+        text-align: center;
+    }
+
+    .results-panel {
+        width: 60%;
+    }
 }
