@@ -52,10 +52,19 @@ function getFutureWeather(data) {
         var futureWeather = {
             date: convertUnixTime(data, i),
             icon: "http://openweathermap.org/img/wn/" + data.daily[i + 1].weather[0].icon + "@2x.png",
-            temp: data.daily[i + 1].temp.day,
+            temp: data.daily[i + 1].temp.day.toFixed(1),
             humidity: data.daily[i + 1].humidity
         }
         futureWeatherList.push(futureWeather);
+
+        var currentSelector = "#day-" + i;
+        $(currentSelector)[0].textContent = futureWeather.date;
+        currentSelector = "#img-" + i;
+        $(currentSelector)[0].src = futureWeather.icon;
+        currentSelector = "#temp-" + i;
+        $(currentSelector)[0].textContent = "Temp: " + futureWeather.temp + " \u2109";
+        currentSelector = "#hum-" + i;
+        $(currentSelector)[0].textContent = "Humidity: " + futureWeather.humidity + "%";
     }
 
     console.log(futureWeatherList);
