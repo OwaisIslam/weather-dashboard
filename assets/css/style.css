@@ -39,10 +39,15 @@ section {
 .results-panel {
     width: 70%;
     padding-bottom: 10px;
+    visibility: hidden;
 }
 
 .current-conditions-panel {
     outline: 1px solid black;
     padding-left: 10px;
     padding-bottom: 1px;
+}
+
+.show-element {
+    visibility: visible;
 }
